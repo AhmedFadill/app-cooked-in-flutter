@@ -42,6 +42,8 @@ class _IntrodacionState extends State<Introdacion> {
             done: const Text("done"),
             next: const Text("next"),
             back: const Text("back"),
+            skip: const Text("skip"),
+            onSkip: () => Navigator.pushReplacementNamed(context, '/primary'),
             onDone: (){
               Navigator.pushReplacementNamed(context, '/primary');
             },

@@ -26,20 +26,38 @@ class _PrimaryState extends State<Primary> {
     prodect('images/dinner.png', "عشاء"),
   ];
   @override
-  
+  int indox=0;
+  BottomNavigationBarItem bott(ico,labl){
+    return BottomNavigationBarItem(icon:ico,label: labl,);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const GNav(
-        gap: 8,
-        tabMargin: EdgeInsets.all(5),
-        activeColor: Colors.white,
-        tabBackgroundColor: Color.fromARGB(255, 243, 67, 54),
-        tabBorderRadius: 50,
-        tabs: [
-        GButton(icon: Icons.home,text: "Home",),
-        GButton(icon: Icons.add,text: "Add",),
-        GButton(icon: Icons.settings,text:"Setting"),
-      ]),
+      bottomNavigationBar: 
+      BottomNavigationBar(items: [bott(Icon(Icons.home), "Home"),bott(Icon(Icons.add), "Add"),bott(Icon(Icons.settings), "setting")],
+      onTap: (value) => setState(() {
+        indox=value;
+      }),
+      currentIndex: indox,
+      selectedItemColor: Colors.red,
+      selectedLabelStyle: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+      showUnselectedLabels: false,
+      ),
+      
+      
+      // const GNav(
+      //   gap: 5,
+      //   tabMargin: EdgeInsets.all(0),
+      //   activeColor: Colors.white,
+      //   tabBackgroundColor: Color.fromARGB(255, 243, 67, 54),
+      //   tabBorderRadius: 20,
+      //   tabs: [
+      //   GButton(icon: Icons.home,text: "Home",),
+      //   GButton(icon: Icons.add,text: "Add",),
+      //   GButton(icon: Icons.settings,text:"Setting"),
+      // ]),
+
+
       body: Container(
         child: Column(
           children: [
@@ -62,13 +80,22 @@ class _PrimaryState extends State<Primary> {
                   ],
                 ))
             ),
-            SizedBox(height: 100,),
+            SizedBox(height: 50,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Icon(Icons.keyboard_double_arrow_left_sharp),
+                Text("يمكنك التمرير لليسار واليمين",style: GoogleFonts.tajawal(fontSize: 18),),
+                Icon(Icons.keyboard_double_arrow_right)
+              ],
+            ),
+            SizedBox(height: 20,),
             SizedBox(
-              height: 250,
+              height: 350,
               child: ScrollSnapList(
                 itemBuilder: _buldListItem,
                  itemCount: prodct.length,
-                  itemSize: 200,
+                  itemSize: 300,
                    onItemFocus: (index){},
                    dynamicItemSize: true,
                    
@@ -83,7 +110,7 @@ class _PrimaryState extends State<Primary> {
     prodect pr=prodct[index];
     return SizedBox(
       height: 100,
-      width: 200,
+      width: 300,
       child: Card(
         elevation: 5,
         child: InkWell(
@@ -92,7 +119,7 @@ class _PrimaryState extends State<Primary> {
             borderRadius: BorderRadius.all(Radius.circular(20)),
             child: Column(
               children: [
-                Image.asset(pr.img,fit: BoxFit.cover,width: 220,height: 190,),
+                Image.asset(pr.img,fit: BoxFit.cover,width: 320,height: 290,),
                 Text(pr.txt,style: GoogleFonts.tajawal(color: Colors.black45,fontSize: 20,fontWeight: FontWeight.bold),)
               ]
               ),
