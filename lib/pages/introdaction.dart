@@ -9,27 +9,30 @@ class Introdacion extends StatefulWidget {
 }
 
 class _IntrodacionState extends State<Introdacion> {
-  List<PageViewModel> pages=[
+  List<PageViewModel> pages = [
     PageViewModel(
       title: "تطبيق طبخاتي",
-      body:"يساعدك على تقليل وقت التفكير بطبخة اليوم والتخلص من اراء البعض العديمة للذوق من خلال اقتراح طبخة من الطبخات التي تعجبك",
-      image:Center(child:Image.asset('images/Choice-pana.png')),
+      body:
+          "يساعدك على تقليل وقت التفكير بطبخة اليوم والتخلص من اراء البعض العديمة للذوق من خلال اقتراح طبخة من الطبخات التي تعجبك",
+      image: Center(child: Image.asset('images/Choice-pana.png')),
     ),
     PageViewModel(
       title: "الخطوة الاولى",
-      body:"حدد اكلاتك المفضلة والتي تستطيع عملها لكل من الفطور والغداء والعشاء",
-      image:Center(child:Image.asset('images/Order food-pana.png')), 
+      body:
+          "حدد اكلاتك المفضلة والتي تستطيع عملها لكل من الفطور والغداء والعشاء",
+      image: Center(child: Image.asset('images/Order food-pana.png')),
     ),
     PageViewModel(
       title: "الخطوة الثانية",
-      body:"حدد توقيت الاكل المطلوب مثلاً فطور او غداء او عشاء",
-      image:Center(child:Image.asset('images/Lunch time-cuate.png'),
-      ), 
+      body: "حدد توقيت الاكل المطلوب مثلاً فطور او غداء او عشاء",
+      image: Center(
+        child: Image.asset('images/Lunch time-cuate.png'),
+      ),
     ),
     PageViewModel(
       title: "اخيراً",
-      body:"بالعافية",
-      image:Center(child:Image.asset('images/Recipe book.gif')), 
+      body: "بالعافية",
+      image: Center(child: Image.asset('images/Recipe book.gif')),
     ),
   ];
   @override
@@ -38,18 +41,17 @@ class _IntrodacionState extends State<Introdacion> {
       body: SafeArea(
         child: IntroductionScreen(
           bodyPadding: EdgeInsets.only(top: 50),
-            pages: pages,
-            done: const Text("done"),
-            next: const Text("next"),
-            back: const Text("back"),
-            skip: const Text("skip"),
-            onSkip: () => Navigator.pushReplacementNamed(context, '/primary'),
-            onDone: (){
-              Navigator.pushReplacementNamed(context, '/primary');
-            },
-            
-            showNextButton: true,
-            showBackButton: true,
+          pages: pages,
+          done: const Text("done"),
+          next: const Text("next"),
+          back: const Text("back"),
+          skip: const Text("skip"),
+          onSkip: () => Navigator.pushReplacementNamed(context, '/primary'),
+          onDone: () {
+            Navigator.pushReplacementNamed(context, '/primary');
+          },
+          showNextButton: true,
+          showBackButton: true,
         ),
       ),
     );
