@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_cooked/pages/introdaction.dart';
+import 'package:you_cooked/pages/page_add/add.dart';
 import 'package:you_cooked/pages/page_select/primary.dart';
 import 'package:you_cooked/pages/splash.dart';
 
@@ -15,7 +16,8 @@ class Index extends StatelessWidget {
       routes: {
         '/': (context) => const Splash_screen(),
         '/intro': (context) => const Introdacion(),
-        '/primary': (context) => const Primary()
+        '/primary': (context) => const Primary(),
+        '/Add': (context) => const Add(),
       },
     );
   }
