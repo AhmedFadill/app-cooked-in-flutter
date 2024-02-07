@@ -39,19 +39,24 @@ class _IntrodacionState extends State<Introdacion> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: IntroductionScreen(
-          bodyPadding: EdgeInsets.only(top: 50),
-          pages: pages,
-          done: const Text("done"),
-          next: const Text("next"),
-          back: const Text("back"),
-          skip: const Text("skip"),
-          onSkip: () => Navigator.pushReplacementNamed(context, '/primary'),
-          onDone: () {
-            Navigator.pushReplacementNamed(context, '/primary');
-          },
-          showNextButton: true,
-          showBackButton: true,
+        child: Container(
+          color: Colors.white,
+          height: double.infinity,
+          width: double.infinity,
+          child: IntroductionScreen(
+            bodyPadding: EdgeInsets.only(top: 50),
+            pages: pages,
+            done: const Text("done"),
+            next: const Text("next"),
+            back: const Text("back"),
+            skip: const Text("skip"),
+            onSkip: () => Navigator.pushReplacementNamed(context, '/primary'),
+            onDone: () {
+              Navigator.pushReplacementNamed(context, '/primary');
+            },
+            showNextButton: true,
+            showBackButton: true,
+          ),
         ),
       ),
     );

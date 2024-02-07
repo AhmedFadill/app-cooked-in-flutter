@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:you_cooked/pages/page_add/add.dart';
 import 'package:you_cooked/pages/page_select/data.dart';
 
@@ -34,6 +38,17 @@ class _PrimaryState extends State<Primary> {
       icon: ico,
       label: labl,
     );
+  }
+
+  bool showImge = true;
+  bool showText = false;
+  void tim() {
+    Future.delayed(Duration(milliseconds: 400),(){
+      setState(() {
+        showImge!=showImge;
+        showText!=showText;
+      });
+    });
   }
 
   Widget build(BuildContext context) {
@@ -193,7 +208,38 @@ class _PrimaryState extends State<Primary> {
         child: Card(
           elevation: 5,
           child: InkWell(
-            onTap: () => print("the page $index \n"),
+            onTap: () async {
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              final a = prefs.getStringList("item1");
+              print(a);
+              print("the page $index \n");
+              tim();
+              // ignore: use_build_context_synchronously
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return Column(
+                      children: [
+                        Visibility(
+                          child: AlertDialog(
+                            backgroundColor: Colors.transparent,
+                            content:
+                                Image.asset("images/pc8Oi1SZ1CsL1T15I8.gif"),
+                            actions: [],
+                          ),
+                          visible: showImge,
+                        ),
+                        Visibility(
+                          child: AlertDialog(
+                            title: Text('Are you sure?'),
+                          ),
+                          visible: showText,
+                        )
+                      ],
+                    );
+                  });
+            },
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Column(children: [

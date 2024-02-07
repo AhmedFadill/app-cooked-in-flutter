@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Add extends StatefulWidget {
   const Add({super.key});
@@ -12,6 +15,9 @@ class Add extends StatefulWidget {
 
 class _AddState extends State<Add> {
   String DropdownButtonValue = "فطور";
+  TextEditingController controller1 = new TextEditingController();
+  var data = {'فطور': [], 'غداء': [], 'عشاء': []};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +29,8 @@ class _AddState extends State<Add> {
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Image.asset("images/pexels-vojtech-okenka-1055272.jpg"),
+                  Image.asset(
+                      "images/pexels-vojtech-okenka-1055272.jpg"), //
                   Column(
                     children: [
                       SizedBox(
@@ -39,11 +46,14 @@ class _AddState extends State<Add> {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextField(
+                    controller: controller1,
+                    onChanged: (value) =>
+                        print("controller1${controller1.text}"),
                     textAlign: TextAlign.right,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "... تمن وقيمة , بتيتة وبيض , ريزو ",
                         label: Text("قائمة الاكلات"),
                         focusedBorder: OutlineInputBorder(
@@ -90,6 +100,7 @@ class _AddState extends State<Add> {
                       onChanged: (String? newv) {
                         setState(() {
                           DropdownButtonValue = newv!;
+                          print(DropdownButtonValue);
                         });
                       }),
                 ),
@@ -98,7 +109,36 @@ class _AddState extends State<Add> {
                 height: 70,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  if (controller1.text != "") {
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    DropdownButtonValue == "فطور"
+                        ? await prefs.setStringList(
+                            "item1", controller1.text.split("،"))
+                        : DropdownButtonValue == "غداء"
+                            ? await prefs.setStringList(
+                                "item2", controller1.text.split("،"))
+                            : await prefs.setStringList(
+                                "item3", controller1.text.split("،"));
+                    final a = prefs.getStringList("item1");
+                    print(a);
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                              title: Text("القائمة فارغة"),
+                              content: Text('يجب اضافة قائمة طعام'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("اسف"))
+                              ],
+                            ));
+                  }
+                },
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
