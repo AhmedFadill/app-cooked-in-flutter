@@ -44,7 +44,7 @@ class _IntrodacionState extends State<Introdacion> {
           height: double.infinity,
           width: double.infinity,
           child: IntroductionScreen(
-            bodyPadding: EdgeInsets.only(top: 50),
+            bodyPadding: const EdgeInsets.only(top: 50),
             pages: pages,
             done: const Text("done"),
             next: const Text("next"),

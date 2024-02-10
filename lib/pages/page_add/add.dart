@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,25 +14,24 @@ class Add extends StatefulWidget {
 
 class _AddState extends State<Add> {
   String DropdownButtonValue = "فطور";
-  TextEditingController controller1 = new TextEditingController();
+  TextEditingController controller1 = TextEditingController();
   var data = {'فطور': [], 'غداء': [], 'عشاء': []};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: SingleChildScrollView(
             child: Column(children: [
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Image.asset(
-                      "images/pexels-vojtech-okenka-1055272.jpg"), //
+                  Image.asset("images/pexels-vojtech-okenka-1055272.jpg"), //
                   Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       Text(
@@ -54,8 +52,11 @@ class _AddState extends State<Add> {
                         print("controller1${controller1.text}"),
                     textAlign: TextAlign.right,
                     decoration: const InputDecoration(
-                        hintText: "... تمن وقيمة , بتيتة وبيض , ريزو ",
-                        label: Text("قائمة الاكلات"),
+                        hintText: "... تمن وقيمة ، بتيتة وبيض ، ريزو ",
+                        label: Text(
+                          "قائمة الاكلات",
+                          style: TextStyle(),
+                        ),
                         focusedBorder: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
@@ -64,7 +65,7 @@ class _AddState extends State<Add> {
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -75,9 +76,9 @@ class _AddState extends State<Add> {
                       borderRadius: BorderRadius.circular(10)),
                   child: DropdownButton(
                       value: DropdownButtonValue,
-                      padding: EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(0),
                       isExpanded: true,
-                      underline: SizedBox(),
+                      underline: const SizedBox(),
                       items: const [
                         DropdownMenuItem(
                           value: "فطور",
@@ -106,7 +107,15 @@ class _AddState extends State<Add> {
                 ),
               ),
               const SizedBox(
-                height: 70,
+                height: 20,
+              ),
+              Text(
+                " ، يجب اضافة قائمة طعام كاملة وتأكد ان تفصل كل اكلة بفارزة",
+                style: GoogleFonts.tajawal(
+                    fontSize: 13, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(
+                height: 40,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -123,18 +132,24 @@ class _AddState extends State<Add> {
                                 "item3", controller1.text.split("،"));
                     final a = prefs.getStringList("item1");
                     print(a);
+                    controller1.clear();
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                      "تم الحفظ!",
+                      textAlign: TextAlign.right,
+                    )));
                   } else {
                     showDialog(
                         context: context,
                         builder: (_) => AlertDialog(
-                              title: Text("القائمة فارغة"),
-                              content: Text('يجب اضافة قائمة طعام'),
+                              title: const Text("القائمة فارغة"),
+                              content: const Text('يجب اضافة قائمة طعام'),
                               actions: [
                                 TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("اسف"))
+                                    child: const Text("اسف"))
                               ],
                             ));
                   }
