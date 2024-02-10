@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Random extends StatefulWidget {
   const Random({super.key, this.food});
@@ -27,9 +26,10 @@ class _RandomState extends State<Random> {
     return showtext == false
         ? AlertDialog(
             backgroundColor: Colors.transparent,
-            content: Text(
+            content: const Text(
               "...انتظر قليلاً",
-              style: GoogleFonts.tajawal(
+              style: TextStyle(
+                  fontFamily: "tajawal",
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
@@ -39,21 +39,22 @@ class _RandomState extends State<Random> {
             actions: const [],
           )
         : AlertDialog(
-            backgroundColor: Colors.red,
             content: Text(
               "$food",
-              style: GoogleFonts.tajawal(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              textAlign: TextAlign.right,
-            ),
-            title: Text(
-              "اكلة اليوم هي",
-              style: GoogleFonts.tajawal(
+              style: const TextStyle(
+                  fontFamily: "tajawal",
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+            title: const Text(
+              "اكلة اليوم هي",
+              style: TextStyle(
+                  fontFamily: "tajawal",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
               textAlign: TextAlign.center,
             ),
             actions: const []);

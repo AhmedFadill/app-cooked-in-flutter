@@ -17,21 +17,12 @@ class Primary extends StatefulWidget {
 }
 
 class _PrimaryState extends State<Primary> {
-  // Widget gen_item(img,txt){
-  //   return Column(
-  //     children: [
-  //       Image.asset(img,height: 350,width: 350,),
-  //       Text(txt)
-  //     ],
-  //   );
-  // }
   List<prodect> prodct = [
     prodect('images/png-clipart-food-fried-food-food-delicatessen.png', "فطور"),
     prodect('images/pngtree-charcoal-biryani-free-psd-png-image_9122563.png',
         "غداء"),
     prodect('images/dinner.png', "عشاء"),
   ];
-  @override
   int indox = 0;
   int index_circt = 0;
   BottomNavigationBarItem bott(ico, labl) {
@@ -82,117 +73,119 @@ class _PrimaryState extends State<Primary> {
 
         body: indox == 0
             ? Column(
-              children: [
-                SizedBox(
-                    height: 150,
-                    // decoration: const BoxDecoration(
-                    //   color: Color(0xffA94438),
-                    //   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),
-                    //   bottomRight: Radius.circular(15)),
-                    // ),
-                    child: SafeArea(
-                        child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          "Food Menu",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.aBeeZee(
-                              color: Colors.red,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Divider(
-                          color: Colors.red[500],
-                          thickness: 3,
-                          indent: 75,
-                          endIndent: 75,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "اختر الطبق الذي تريده",
-                          style: GoogleFonts.tajawal(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ))),
-                const SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Icon(Icons.keyboard_double_arrow_left_sharp),
-                    Text(
-                      "يمكنك التمرير لليسار واليمين",
-                      style: GoogleFonts.tajawal(fontSize: 18),
-                    ),
-                    const Icon(Icons.keyboard_double_arrow_right)
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 350,
-                  child: ScrollSnapList(
-                    itemBuilder: _buldListItem,
-                    itemCount: prodct.length,
-                    itemSize: 300,
-                    onItemFocus: (index) {
-                      setState(() {
-                        index_circt = index;
-                      });
-                    },
-                    dynamicItemSize: true,
+                children: [
+                  SizedBox(
+                      height: 150,
+                      // decoration: const BoxDecoration(
+                      //   color: Color(0xffA94438),
+                      //   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),
+                      //   bottomRight: Radius.circular(15)),
+                      // ),
+                      child: SafeArea(
+                          child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Food Menu",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.aBeeZee(
+                                color: Colors.red,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Divider(
+                            color: Colors.red[500],
+                            thickness: 3,
+                            indent: 75,
+                            endIndent: 75,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Text(
+                            "اختر الطبق الذي تريده",
+                            style: TextStyle(
+                                fontFamily: "tajawal",
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ))),
+                  const SizedBox(
+                    height: 50,
                   ),
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    index_circt == 0
-                        ? const Icon(
-                            Icons.circle_rounded,
-                            size: 17,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.circle_rounded,
-                            size: 12,
-                          ),
-                    const SizedBox(width: 15),
-                    index_circt == 1
-                        ? const Icon(
-                            Icons.circle_rounded,
-                            size: 17,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.circle_rounded,
-                            size: 12,
-                          ),
-                    const SizedBox(width: 15),
-                    index_circt == 2
-                        ? const Icon(
-                            Icons.circle_rounded,
-                            size: 17,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.circle_rounded,
-                            size: 12,
-                          ),
-                  ],
-                )
-              ],
-            )
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(Icons.keyboard_double_arrow_left_sharp),
+                      Text(
+                        "يمكنك التمرير لليسار واليمين",
+                        style: TextStyle(fontFamily: "tajawl", fontSize: 18),
+                      ),
+                      Icon(Icons.keyboard_double_arrow_right)
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 350,
+                    child: ScrollSnapList(
+                      itemBuilder: _buldListItem,
+                      itemCount: prodct.length,
+                      itemSize: 300,
+                      onItemFocus: (index) {
+                        setState(() {
+                          index_circt = index;
+                        });
+                      },
+                      dynamicItemSize: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 35,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      index_circt == 0
+                          ? const Icon(
+                              Icons.circle_rounded,
+                              size: 17,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.circle_rounded,
+                              size: 12,
+                            ),
+                      const SizedBox(width: 15),
+                      index_circt == 1
+                          ? const Icon(
+                              Icons.circle_rounded,
+                              size: 17,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.circle_rounded,
+                              size: 12,
+                            ),
+                      const SizedBox(width: 15),
+                      index_circt == 2
+                          ? const Icon(
+                              Icons.circle_rounded,
+                              size: 17,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.circle_rounded,
+                              size: 12,
+                            ),
+                    ],
+                  )
+                ],
+              )
             : indox == 1
                 ? const Add()
                 : const Setting());
@@ -220,15 +213,16 @@ class _PrimaryState extends State<Primary> {
               showDialog(
                 context: context,
                 builder: (_) {
-                  return a != null
+                  return a!.isNotEmpty
                       ? Random(
                           food: a[0],
                         )
-                      : AlertDialog(
+                      : const AlertDialog(
                           backgroundColor: Colors.red,
                           content: Text(
                             "القائمة فارغة يرجى اضافة قائمة جديدة",
-                            style: GoogleFonts.tajawal(
+                            style: TextStyle(
+                                fontFamily: "tajawl",
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
@@ -248,7 +242,8 @@ class _PrimaryState extends State<Primary> {
                 ),
                 Text(
                   pr.txt,
-                  style: GoogleFonts.tajawal(
+                  style: const TextStyle(
+                      fontFamily: "tajawl",
                       color: Colors.black45,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),

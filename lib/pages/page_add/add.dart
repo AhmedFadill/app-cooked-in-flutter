@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Add extends StatefulWidget {
@@ -29,15 +27,17 @@ class _AddState extends State<Add> {
                 alignment: Alignment.topCenter,
                 children: [
                   Image.asset("images/pexels-vojtech-okenka-1055272.jpg"), //
-                  Column(
+                  const Column(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: 40,
                       ),
                       Text(
                         "اضف قائمة طعام يمكنك تحضيرها",
-                        style: GoogleFonts.tajawal(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontFamily: "tajawal",
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.right,
                       ),
                     ],
@@ -82,26 +82,25 @@ class _AddState extends State<Add> {
                       items: const [
                         DropdownMenuItem(
                           value: "فطور",
+                          alignment: Alignment.center,
                           child: Text(
                             "فطور",
                           ),
-                          alignment: Alignment.center,
                         ),
                         DropdownMenuItem(
                           value: "غداء",
-                          child: Text("غداء"),
                           alignment: Alignment.center,
+                          child: Text("غداء"),
                         ),
                         DropdownMenuItem(
                           value: "عشاء",
-                          child: Text("عشاء"),
                           alignment: Alignment.center,
+                          child: Text("عشاء"),
                         ),
                       ],
                       onChanged: (String? newv) {
                         setState(() {
                           DropdownButtonValue = newv!;
-                          print(DropdownButtonValue);
                         });
                       }),
                 ),
@@ -109,10 +108,12 @@ class _AddState extends State<Add> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 " ، يجب اضافة قائمة طعام كاملة وتأكد ان تفصل كل اكلة بفارزة",
-                style: GoogleFonts.tajawal(
-                    fontSize: 13, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontFamily: "tajawal",
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
               ),
               const SizedBox(
                 height: 40,
@@ -122,22 +123,49 @@ class _AddState extends State<Add> {
                   if (controller1.text != "") {
                     final SharedPreferences prefs =
                         await SharedPreferences.getInstance();
-                    DropdownButtonValue == "فطور"
-                        ? await prefs.setStringList(
-                            "item1", controller1.text.split("،"))
-                        : DropdownButtonValue == "غداء"
-                            ? await prefs.setStringList(
-                                "item2", controller1.text.split("،"))
-                            : await prefs.setStringList(
-                                "item3", controller1.text.split("،"));
-                    final a = prefs.getStringList("item1");
-                    print(a);
+                    if (DropdownButtonValue == "فطور") {
+                      final a = prefs.getStringList("item1");
+                      List<String> b = controller1.text.split("،");
+                      if (a != null) {
+                        a.addAll(b);
+                        await prefs.setStringList("item1", a);
+                      } else {
+                        await prefs.setStringList(
+                            "item1", controller1.text.split("،"));
+                      }
+                    } else if (DropdownButtonValue == "غداء") {
+                      final a = prefs.getStringList("item2");
+                      List<String> b = controller1.text.split("،");
+                      if (a != null) {
+                        a.addAll(b);
+                        await prefs.setStringList("item2", a);
+                      } else {
+                        await prefs.setStringList(
+                            "item2", controller1.text.split("،"));
+                      }
+                    } else {
+                      final a = prefs.getStringList("item3");
+                      List<String> b = controller1.text.split("،");
+                      if (a != null) {
+                        a.addAll(b);
+                        await prefs.setStringList("item3", a);
+                      } else {
+                        await prefs.setStringList(
+                            "item3", controller1.text.split("،"));
+                      }
+                    }
+
                     controller1.clear();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Color.fromARGB(255, 64, 158, 67),
                         content: Text(
-                      "تم الحفظ!",
-                      textAlign: TextAlign.right,
-                    )));
+                          "تم الحفظ!",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontFamily: "tajawal",
+                              fontWeight: FontWeight.bold),
+                        )));
                   } else {
                     showDialog(
                         context: context,
@@ -161,10 +189,12 @@ class _AddState extends State<Add> {
                   backgroundColor: MaterialStateProperty.all(Colors.red[500]),
                   foregroundColor: MaterialStateProperty.all(Colors.white),
                 ),
-                child: Text(
+                child: const Text(
                   "اضف القائمة",
-                  style: GoogleFonts.tajawal(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontFamily: "tajawal",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               )
             ]),

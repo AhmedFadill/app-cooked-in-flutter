@@ -13,6 +13,7 @@ class Index extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: "tajawal", useMaterial3: true),
       routes: {
         '/': (context) => const Splash_screen(),
         '/intro': (context) => const Introdacion(),
